@@ -8,31 +8,28 @@ function About(){
         avatar:"/images/avt.jpg",
         grade:"12C3"
     }
-    return(
-        <>
-        <div className="container mt-4">
+    return (
+    <div className="container mt-4">
       <h1 className="mb-4">Student Information</h1>
 
-      <Card style={{ width: '18rem' }}>
-        <Card.Img
-          variant="top"
+      <div className="card" style={{ width: "18rem" }}>
+        <img
           src={student.avatar}
+          className="card-img-top"
           alt="student avatar"
         />
 
-        <Card.Body>
-          <Card.Title>{student.name}</Card.Title>
+        <div className="card-body">
+          <h5 className="card-title">{student.name}</h5>
 
-          <Card.Text>
+          <p className="card-text">
             <strong>ID:</strong> {student.id} <br />
             <strong>Age:</strong> {student.age} <br />
             <strong>Grade:</strong> {student.grade}
-          </Card.Text>
-          <Button variant="primary">View Details</Button>
-        </Card.Body>
-      </Card>
+          </p>
+        </div>
+      </div>
     </div>
-        </>
-    );
+  );
 }
 export default About;
