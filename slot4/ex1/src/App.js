@@ -3,7 +3,8 @@ import Footer from "./components/Footer";
 import HeroCarousel from "./components/HeroCarousel";
 import Navbar from "./components/Navbar";
 import PizzaListt from "./pages/PizzaListt";
-import BookTable from "./components/BookTable";
+import BookTable from "./pages/BookTable";
+
 
 function App() {
   return (

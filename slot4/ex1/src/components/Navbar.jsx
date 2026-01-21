@@ -1,5 +1,7 @@
 import React from "react";
 import { Container, Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import AboutUs from "../pages/AboutUs";
 
 export default function AppNavbar() {
   return (

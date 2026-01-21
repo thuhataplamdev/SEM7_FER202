@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { foods } from "../data/food";
-import { Card, Container, Row, Col, Button, Badge, Pagination } from "react-bootstrap";
+import { Container, Row, Col, Pagination } from "react-bootstrap";
+import PizzaDetailModal from "../components/PizzaDetailModal";
+import PizzaCard from "../components/PizzaCard";
 
 export default function PizzaListt() {
   const pageSize = 8;
@@ -22,6 +24,23 @@ export default function PizzaListt() {
     cursor: "pointer",
   });
 
+  const [show, setShow] = useState(false);
+  const [selected, setSelected] = useState(null);
+
+  const openDetails = (pizza) => {
+    setSelected(pizza);
+    setShow(true);
+  };
+
+  const closeDetails = () => {
+    setShow(false);
+    setSelected(null);
+  };
+
+  const buyPizza = (pizza) => {
+    alert(`Added ${pizza.name} to cart!`);
+  };
+
   return (
     <section id="menu" className="bg-dark py-5">
       <Container>
@@ -30,43 +49,17 @@ export default function PizzaListt() {
         <Row>
           {pageFoods.map((f) => (
             <Col key={f.id} xs={12} sm={6} lg={3} className="mb-4">
-              <Card className="h-100 shadow border-0 position-relative">
-                {f.tag && (
-                  <Badge bg="warning" text="dark" className="position-absolute top-0 start-0 m-2 px-3 py-2">
-                    {f.tag.toUpperCase()}
-                  </Badge>
-                )}
-
-                <div style={{ height: 220, overflow: "hidden" }}>
-                  <Card.Img src={f.image} className="w-100 h-100" style={{ objectFit: "cover" }} />
-                </div>
-
-                <Card.Body className="text-center">
-                  <Card.Title className="fw-bold">{f.name}</Card.Title>
-
-                  <div className="mb-3">
-                    {f.promotion ? (
-                      <>
-                        <span className="text-muted text-decoration-line-through me-2">
-                          ${f.price}
-                        </span>
-                        <span className="fw-bold text-danger">${f.promotion}</span>
-                      </>
-                    ) : (
-                      <span className="fw-bold">${f.price}</span>
-                    )}
-                  </div>
-
-                  <Button variant="secondary" className="w-100">Buy</Button>
-                </Card.Body>
-              </Card>
+              <PizzaCard pizza={f} onView={openDetails} onBuy={buyPizza} />
             </Col>
           ))}
         </Row>
 
         {totalPages > 1 && (
           <div className="d-flex justify-content-end mt-3">
-           <Pagination className="mb-0 bg-transparent border-0 shadow-none">
+            <Pagination
+              className="mb-0"
+              style={{ background: "transparent", border: "none", boxShadow: "none" }}
+            >
               <Pagination.Prev
                 disabled={page === 1}
                 onClick={() => go(page - 1)}
@@ -92,6 +85,8 @@ export default function PizzaListt() {
             </Pagination>
           </div>
         )}
+
+        <PizzaDetailModal show={show} onClose={closeDetails} p={selected} />
       </Container>
     </section>
   );

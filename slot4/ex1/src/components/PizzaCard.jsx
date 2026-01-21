@@ -1,61 +1,62 @@
 import React from "react";
-import { foods } from "../data/food";
-import { Card, Container, Row, Col, Button, Badge } from "react-bootstrap";
+import { Card, Button, Badge } from "react-bootstrap";
 
-function PizzaCard() {
+export default function PizzaCard({ pizza, onView, onBuy }) {
   return (
-    <Container className="mt-4">
-      <Row>
-        {foods.map((food) => (
-          <Col key={food.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
-            <Card className="h-100 bg-dark text-white border-0 position-relative">
-              {food.tag && (
-                <Badge
-                  bg="warning"
-                  text="dark"
-                  className="position-absolute top-0 start-0 m-2 px-3 py-2"
-                >
-                  {food.tag.toUpperCase()}
-                </Badge>
-              )}
+    <Card className="h-100 shadow border-0 position-relative">
+      {pizza.tag && (
+        <Badge
+          bg="warning"
+          text="dark"
+          className="position-absolute top-0 start-0 m-2 px-3 py-2"
+        >
+          {pizza.tag.toUpperCase()}
+        </Badge>
+      )}
 
-              <Card.Img
-                src={food.image}
-                alt={food.name}
-                style={{ height: "200px", objectFit: "cover" }}
-              />
+      <div style={{ height: 220, overflow: "hidden" }}>
+        <Card.Img
+          src={pizza.image}
+          alt={pizza.name}
+          className="w-100 h-100"
+          style={{ objectFit: "cover" }}
+        />
+      </div>
 
-              <Card.Body className="text-center">
-                <Card.Title className="fw-bold">
-                  {food.name}
-                </Card.Title>
+      <Card.Body className="text-center">
+        <Card.Title className="fw-bold">{pizza.name}</Card.Title>
 
-                <div className="mb-3">
-                  {food.promotion ? (
-                    <>
-                      <span className="text-muted text-decoration-line-through me-2">
-                        ${food.price}
-                      </span>
-                      <span className="fw-bold text-warning">
-                        ${food.promotion}
-                      </span>
-                    </>
-                  ) : (
-                    <span className="fw-bold">VND{food.price}</span>
-                  )}
-                </div>
+        <div className="mb-3">
+          {pizza.promotion ? (
+            <>
+              <span className="text-muted text-decoration-line-through me-2">
+                ${pizza.price}
+              </span>
+              <span className="fw-bold text-danger">${pizza.promotion}</span>
+            </>
+          ) : (
+            <span className="fw-bold">${pizza.price}</span>
+          )}
+        </div>
 
-                <Button variant="secondary" className="w-100">
-                  Buy
-                </Button>
-              </Card.Body>
+        <div className="d-flex gap-2 justify-content-center">
+          <Button
+            variant="outline-danger"
+            className="px-3"
+            onClick={() => onView?.(pizza)}
+          >
+            View Details
+          </Button>
 
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+          <Button
+            variant="secondary"
+            className="px-4"
+            onClick={() => onBuy?.(pizza)}
+          >
+            Buy
+          </Button>
+        </div>
+      </Card.Body>
+    </Card>
   );
 }
-
-export default PizzaCard;

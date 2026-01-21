@@ -7,7 +7,7 @@ export default function HeroCarousel() {
       <Carousel fade interval={3000} pause="hover">
         {banners.map((b, idx) => (
           <Carousel.Item key={idx}>
-            <div className="overflow-hidden mt-1" style={{ maxHeight: "320px" }}>
+            <div className="overflow-hidden mt-1" style={{ maxHeight: "420px" }}>
               <img
                 className="d-block w-100"
                 src={b.img}
