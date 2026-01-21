@@ -26,7 +26,7 @@ export default function PizzaDetails() {
         <Button as={Link} to="/" variant="secondary" className="mb-3"> Back </Button>
 
         <div className="bg-white rounded shadow p-3">
-          <div style={{ height: 320, overflow: "hidden" }} className="rounded mb-3">
+          <div style={{ height: 520, overflow: "hidden" }} className="rounded mb-3">
             <img src={pizza.image} alt={pizza.name} className="w-100 h-100" style={{ objectFit: "cover" }}/>
           </div>
 
